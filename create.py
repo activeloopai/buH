@@ -4,6 +4,7 @@ from generate_dummy_data import *
 v = hub.__version__.replace(".", "_")
 dataset_path = f"./datasets/{v}"
 
+COMPRESSION = None
 IMAGES = "images"
 LABELS = "labels"
 
@@ -14,23 +15,27 @@ def _assert_lengths(ds):
 
 
 def v2_0_1():
+    # TODO
     raise NotImplementedError
 
 def v2_0_2():
+    # TODO
     raise NotImplementedError
 
 def v2_0_3():
+    # TODO
     raise NotImplementedError
 
 def v2_0_4():
     assert v == "2_0_4"
 
     ds = hub.empty(dataset_path, overwrite=True)
-    ds.create_tensor(IMAGES, htype="image", sample_compression="png")
+    ds.create_tensor(IMAGES, htype="image", sample_compression=COMPRESSION)
     ds.create_tensor(LABELS, htype="class_label", class_names=["class1", "class2"])
 
-    ds.images.extend(get_images())
-    ds.labels.extend(get_labels())
+    with ds:
+        ds.images.extend(get_images())
+        ds.labels.extend(get_labels())
 
     _assert_lengths(ds)
 
