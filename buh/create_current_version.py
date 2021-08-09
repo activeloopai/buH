@@ -38,12 +38,6 @@ def _create1():
     _populate_dummy_data(ds)
 
 
-def _create_v2_0_1():
-    assert UNDERSCORED_VERSION == "2_0_1"
-    compression = "uncompressed" if COMPRESSION is None else COMPRESSION
-    _create0(compression)
-
-
 def _create_v2_0_2():
     assert UNDERSCORED_VERSION == "2_0_2"
     _create0(COMPRESSION)
