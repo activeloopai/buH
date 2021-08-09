@@ -1,5 +1,5 @@
 import hub
-from generate_dummy_data import *
+from .dummy_data import *
 
 v = hub.__version__.replace(".", "_")
 dataset_path = f"./datasets/{v}"
