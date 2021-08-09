@@ -1,12 +1,8 @@
 import hub
-from .dummy_data import *
+from .util import *
+from .constants import *
 
-v = hub.__version__.replace(".", "_")
-dataset_path = f"./datasets/{v}"
-
-COMPRESSION = None
-IMAGES = "images"
-LABELS = "labels"
+dataset_path = f"./datasets/{UNDERSCORE_VERSION}"
 
 
 def _assert_lengths(ds):
@@ -41,28 +37,32 @@ def _create1():
     _populate_dummy_data(ds)
 
 
-def v2_0_1():
-    assert v == "2_0_1"
+def _create_v2_0_1():
+    assert UNDERSCORE_VERSION == "2_0_1"
     compression = "uncompressed" if COMPRESSION is None else COMPRESSION
     _create0(compression)
 
 
-def v2_0_2():
-    assert v == "2_0_2"
+def _create_v2_0_2():
+    assert UNDERSCORE_VERSION == "2_0_2"
     _create0(COMPRESSION)
 
 
-def v2_0_3():
-    assert v == "2_0_3"
+def _create_v2_0_3():
+    assert UNDERSCORE_VERSION == "2_0_3"
     _create1()
 
 
-def v2_0_4():
-    assert v == "2_0_4"
+def _create_v2_0_4():
+    assert UNDERSCORE_VERSION == "2_0_4"
     _create1()
+
+
+def _create_current_version():
+    eval(f"_create_v{UNDERSCORE_VERSION}()")
 
 
 if __name__ == "__main__":
     print(f"generating dataset for hub version {hub.__version__}")
-    eval(f"v{v}()")
+    _create_current_version()
     print("success")

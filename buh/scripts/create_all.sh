@@ -9,10 +9,11 @@ for i in \
 do
     echo "\ninstalling $i..."
     pip install hub==$i >> /dev/null 2>&1
-    python create.py
+    python create_current_version.py
 done
 
 echo "\nfinished creating datasets for all versions!\n"
 
+# in case the user used `pip install -e .` before they ran this
 echo "uninstalling hub..."
 pip uninstall hub -y >> /dev/null 2>&1
