@@ -14,21 +14,7 @@ def _assert_lengths(ds):
     assert len(ds[LABELS]) == 50000
 
 
-def v2_0_1():
-    # TODO
-    raise NotImplementedError
-
-def v2_0_2():
-    # TODO
-    raise NotImplementedError
-
-def v2_0_3():
-    # TODO
-    raise NotImplementedError
-
-def v2_0_4():
-    assert v == "2_0_4"
-
+def _create1():
     ds = hub.empty(dataset_path, overwrite=True)
     ds.create_tensor(IMAGES, htype="image", sample_compression=COMPRESSION)
     ds.create_tensor(LABELS, htype="class_label", class_names=["class1", "class2"])
@@ -38,6 +24,24 @@ def v2_0_4():
         ds.labels.extend(get_labels())
 
     _assert_lengths(ds)
+
+
+def v2_0_1():
+    # TODO
+    raise NotImplementedError
+
+def v2_0_2():
+    # TODO
+    raise NotImplementedError
+
+def v2_0_3():
+    assert v == "2_0_3"
+    _create1()
+
+def v2_0_4():
+    assert v == "2_0_4"
+    _create1()
+    
 
 
 if __name__ == "__main__":
