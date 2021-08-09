@@ -1,6 +1,8 @@
 echo "uninstalling hub..."
 pip uninstall hub -y >> /dev/null 2>&1
 
+rm -rf ./datasets/
+
 for i in \
     2.0.2 \
     2.0.3 \

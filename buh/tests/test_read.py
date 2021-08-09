@@ -1,5 +1,5 @@
-import pytest
 import numpy as np
+from buh.tests.common import *
 from buh.util import *
 from buh.constants import *
 
@@ -27,15 +27,8 @@ def _assert_valid(ds):
     np.testing.assert_array_equal(images, get_images())
     np.testing.assert_array_equal(labels, get_labels())
 
-
-def _skip_if_not_available(required_version):
-    """Calls pytest.skip if the current hub version is < required_version"""
-
-    if hub.__version__ < required_version:
-        pytest.skip()
-
-@pytest.mark.parametrize("version", ALL_VERSIONS)
+@versions
 def test(version):
-    _skip_if_not_available(version)
+    skip_if_not_available(version)
     ds = _load_dataset(version)
     _assert_valid(ds)

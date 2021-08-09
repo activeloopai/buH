@@ -1,9 +1,12 @@
+import pytest
 import hub
 from buh.util import *
 from buh.constants import *
+from buh.tests.common import *
 
 
 dataset_path = get_dataset_path(UNDERSCORED_VERSION)
+COMPRESSION = None
 
 
 def _assert_lengths(ds):
@@ -18,16 +21,13 @@ def _populate_dummy_data(ds):
     _assert_lengths(ds)
 
 
-def _create0(compression):
-    ds = hub.Dataset(dataset_path)
-    ds.delete()
+def _create0():
     ds = hub.Dataset(dataset_path)
 
-    ds.create_tensor(IMAGES, htype="image", sample_compression=compression)
+    ds.create_tensor(IMAGES, htype="image", sample_compression=COMPRESSION)
     ds.create_tensor(
         LABELS, htype="class_label", class_names=["class1", "class2"], dtype=np.uint8
     )
-
     _populate_dummy_data(ds)
 
 
@@ -38,26 +38,17 @@ def _create1():
     _populate_dummy_data(ds)
 
 
-def _create_v2_0_2():
-    assert UNDERSCORED_VERSION == "2_0_2"
-    _create0(COMPRESSION)
+CREATE_FUNCS = {
+    "2.0.2": _create0,
+    "default": _create1,
+}
 
-
-def _create_v2_0_3():
-    assert UNDERSCORED_VERSION == "2_0_3"
-    _create1()
-
-
-def _create_v2_0_4():
-    assert UNDERSCORED_VERSION == "2_0_4"
-    _create1()
-
-
-def _create_current_version():
-    eval(f"_create_v{UNDERSCORED_VERSION}()")
-
+def _create_dataset_for_current_version():
+    # TODO: docstring
+    creator = CREATE_FUNCS.get(hub.__version__, CREATE_FUNCS["default"])
+    return creator()
 
 if __name__ == "__main__":
     print(f"generating dataset for hub version {hub.__version__}")
-    _create_current_version()
+    _create_dataset_for_current_version()  # TODO: compressions?
     print("success")
