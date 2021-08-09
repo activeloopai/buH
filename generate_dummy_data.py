@@ -7,4 +7,4 @@ def get_images():
 
 
 def get_labels():
-    return np.random.randint(255, size=50000, dtype=np.uint8)
+    return np.random.randint(2, size=50000, dtype=np.uint8)
