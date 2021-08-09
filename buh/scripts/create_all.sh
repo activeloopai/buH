@@ -9,7 +9,7 @@ for i in \
 do
     echo "\ninstalling $i..."
     pip install hub==$i >> /dev/null 2>&1
-    python create_current_version.py
+    python buh/create_current_version.py
 done
 
 echo "\nfinished creating datasets for all versions!\n"

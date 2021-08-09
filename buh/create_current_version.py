@@ -1,8 +1,9 @@
 import hub
-from .util import *
-from .constants import *
+from buh.util import *
+from buh.constants import *
 
-dataset_path = f"./datasets/{UNDERSCORE_VERSION}"
+
+dataset_path = get_dataset_path(UNDERSCORED_VERSION)
 
 
 def _assert_lengths(ds):
@@ -38,28 +39,28 @@ def _create1():
 
 
 def _create_v2_0_1():
-    assert UNDERSCORE_VERSION == "2_0_1"
+    assert UNDERSCORED_VERSION == "2_0_1"
     compression = "uncompressed" if COMPRESSION is None else COMPRESSION
     _create0(compression)
 
 
 def _create_v2_0_2():
-    assert UNDERSCORE_VERSION == "2_0_2"
+    assert UNDERSCORED_VERSION == "2_0_2"
     _create0(COMPRESSION)
 
 
 def _create_v2_0_3():
-    assert UNDERSCORE_VERSION == "2_0_3"
+    assert UNDERSCORED_VERSION == "2_0_3"
     _create1()
 
 
 def _create_v2_0_4():
-    assert UNDERSCORE_VERSION == "2_0_4"
+    assert UNDERSCORED_VERSION == "2_0_4"
     _create1()
 
 
 def _create_current_version():
-    eval(f"_create_v{UNDERSCORE_VERSION}()")
+    eval(f"_create_v{UNDERSCORED_VERSION}()")
 
 
 if __name__ == "__main__":
