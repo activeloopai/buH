@@ -43,10 +43,12 @@ CREATE_FUNCS = {
     "default": _create1,
 }
 
+
 def _create_dataset_for_current_version():
     # TODO: docstring
     creator = CREATE_FUNCS.get(hub.__version__, CREATE_FUNCS["default"])
     return creator()
+
 
 if __name__ == "__main__":
     print(f"generating dataset for hub version {hub.__version__}")
