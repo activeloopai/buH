@@ -26,14 +26,15 @@ def _load_dataset(version):
 
 
 def _assert_valid(ds):
-    images = ds[IMAGES].numpy()
-    labels = ds[LABELS].numpy()
+    images = np.squeeze(ds[IMAGES].numpy())
+    labels = np.squeeze(ds[LABELS].numpy())
     np.testing.assert_array_equal(images, get_images())
     np.testing.assert_array_equal(labels, get_labels())
 
 
 @versions
-def test(version):
+def test(version, request):
+    try_skipping(request)
     skip_if_not_available(version)
     ds = _load_dataset(version)
     _assert_valid(ds)
