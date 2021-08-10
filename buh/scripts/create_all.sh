@@ -3,6 +3,9 @@ pip uninstall hub -y >> /dev/null 2>&1
 
 rm -rf ./datasets/
 
+BASEDIR=$(dirname $0)
+
+
 for i in \
     2.0.2 \
     2.0.3 \
@@ -12,7 +15,7 @@ for i in \
 do
     echo "\ninstalling $i..."
     pip install hub==$i >> /dev/null 2>&1
-    python buh/create_current_version.py
+    python $BASEDIR/../create_current_version.py
 done
 
 echo "\nfinished creating datasets for all versions!\n"
