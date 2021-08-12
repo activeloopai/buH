@@ -51,6 +51,4 @@ def _create_dataset_for_current_version():
 
 
 if __name__ == "__main__":
-    print(f"generating dataset for hub version {hub.__version__}")
     _create_dataset_for_current_version()  # TODO: compressions?
-    print("success")

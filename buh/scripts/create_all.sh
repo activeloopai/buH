@@ -12,8 +12,9 @@ for i in \
     2.0.5 \
     2.0.6 
 do
-    echo "\ninstalling $i..."
+    echo "\ninstalling hub version $i..."
     pip install hub==$i >> /dev/null 2>&1
+    echo "creating dataset for hub version $i"
     python $BASEDIR/../create_current_version.py
 done
 
