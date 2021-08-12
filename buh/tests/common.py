@@ -61,10 +61,12 @@ def load_dataset(version):
     return _bc_load_dataset(dataset_path)
 
 
-def load_dataset_copy(version, suffix=DATASET_SUFFIX):
+def load_dataset_copy(version, suffix=DATASET_SUFFIX, overwrite=False):
     # TODO: docstring/rename func
-    print(hub.__version__)
-
+    
     dataset_path = get_dataset_path(_(version))  # TODO format util func
-    new_path = shutil.copytree(dataset_path, f"{dataset_path}_{suffix}")
+    new_dataset_path = f"{dataset_path}_{suffix}"
+    if overwrite:
+        shutil.rmtree(new_dataset_path, ignore_errors=True)
+    new_path = shutil.copytree(dataset_path, new_dataset_path)
     return _bc_load_dataset(new_path)
