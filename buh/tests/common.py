@@ -63,7 +63,7 @@ def load_dataset(version):
 
 def load_dataset_copy(version, suffix=DATASET_SUFFIX, overwrite=False):
     # TODO: docstring/rename func
-    
+
     dataset_path = get_dataset_path(_(version))  # TODO format util func
     new_dataset_path = f"{dataset_path}_{suffix}"
     if overwrite:

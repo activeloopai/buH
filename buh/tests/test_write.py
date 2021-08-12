@@ -32,12 +32,15 @@ def test_new_samples(version, request):
     actual_images = ds[IMAGES].numpy()
     actual_labels = ds[LABELS].numpy()
     expected_images = np.concatenate((get_images(), get_images()[:10]))
-    expected_labels = np.expand_dims(np.concatenate((get_labels(), get_labels()[:10])), axis=-1)
+    expected_labels = np.expand_dims(
+        np.concatenate((get_labels(), get_labels()[:10])), axis=-1
+    )
 
     np.testing.assert_array_equal(actual_images, expected_images)
     np.testing.assert_array_equal(actual_labels, expected_labels)
 
     assert_new_versions(ds)
+
 
 @versions
 def test_new_tensor(version, request):
@@ -64,8 +67,13 @@ def test_update_samples(version, request):
 
     actual_images = ds[IMAGES].numpy()
     actual_labels = ds[LABELS].numpy()
-    expected_images = np.concatenate((get_images()[:10], get_images()[:10], get_images()[20:]))
-    expected_labels = np.expand_dims(np.concatenate((get_labels()[:10], get_labels()[:20], get_labels()[30:])), axis=-1)
+    expected_images = np.concatenate(
+        (get_images()[:10], get_images()[:10], get_images()[20:])
+    )
+    expected_labels = np.expand_dims(
+        np.concatenate((get_labels()[:10], get_labels()[:20], get_labels()[30:])),
+        axis=-1,
+    )
 
     np.testing.assert_array_equal(actual_images, expected_images)
     np.testing.assert_array_equal(actual_labels, expected_labels)
