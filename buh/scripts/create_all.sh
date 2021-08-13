@@ -1,8 +1,9 @@
 echo "uninstalling hub..."
-pip uninstall hub -y >> /dev/null 2>&1
+pip3 uninstall hub -y >> /dev/null 2>&1
 
 rm -rf ./datasets/
 
+export BUGGER_OFF="true"
 BASEDIR=$(dirname $0)
 
 for i in \
@@ -13,13 +14,13 @@ for i in \
     2.0.6 
 do
     echo "\ninstalling hub version $i..."
-    pip install hub==$i >> /dev/null 2>&1
+    pip3 install hub==$i >> /dev/null 2>&1
     echo "creating dataset for hub version $i"
-    python $BASEDIR/../create_current_version.py
+    python3 $BASEDIR/../create_current_version.py
 done
 
 echo "\nfinished creating datasets for all versions!\n"
 
-# in case the user used `pip install -e .` before they ran this
+# in case the user used `pip3 install -e .` before they ran this
 echo "uninstalling hub..."
-pip uninstall hub -y >> /dev/null 2>&1
+pip3 uninstall hub -y >> /dev/null 2>&1
