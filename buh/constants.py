@@ -11,6 +11,7 @@ ALL_VERSIONS = [
     "2.0.4",
     "2.0.5",
     "2.0.6",
+    "2.0.7",
 ]  # TODO use inside the .sh script
 
 COMPRESSION = None
