@@ -16,7 +16,7 @@ do
     echo "\ninstalling hub version $i..."
     pip3 install hub==$i >> /dev/null 2>&1
     echo "creating dataset for hub version $i"
-    python $BASEDIR/../create_current_version.py
+    python3 $BASEDIR/../create_current_version.py
 done
 
 echo "\nfinished creating datasets for all versions!\n"
