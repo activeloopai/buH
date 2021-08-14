@@ -5,6 +5,7 @@ rm -rf ./datasets/
 
 export BUGGER_OFF="true"
 BASEDIR=$(dirname $0)
+SCRIPT=$BASEDIR/../create_current_version.py
 
 for i in \
     2.0.2 \
@@ -16,7 +17,7 @@ do
     echo "\ninstalling hub version $i..."
     pip3 install hub==$i >> /dev/null 2>&1
     echo "creating dataset for hub version $i"
-    python3 $BASEDIR/../create_current_version.py
+    python3 $SCRIPT || python $SCRIPT
 done
 
 echo "\nfinished creating datasets for all versions!\n"
