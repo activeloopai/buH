@@ -1,5 +1,5 @@
 echo "uninstalling hub..."
-pip3 uninstall hub -y >> /dev/null 2>&1
+pip3 uninstall hub -y || pip uninstall hub -y
 
 rm -rf ./datasets/
 
@@ -16,7 +16,7 @@ for i in \
     2.0.7
 do
     echo "\ninstalling hub version $i..."
-    pip3 install hub==$i >> /dev/null 2>&1
+    pip3 install hub==$i || pip install hub==$i
     echo "creating dataset for hub version $i"
     python3 $SCRIPT || python $SCRIPT
 done
@@ -25,4 +25,4 @@ echo "\nfinished creating datasets for all versions!\n"
 
 # in case the user used `pip3 install -e .` before they ran this
 echo "uninstalling hub..."
-pip3 uninstall hub -y >> /dev/null 2>&1
+pip3 uninstall hub -y || pip uninstall hub -y
