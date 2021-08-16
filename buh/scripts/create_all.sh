@@ -16,7 +16,7 @@ for i in \
     2.0.7
 do
     echo "\ninstalling hub version $i..."
-    pip3 install hub==$i || pip install hub==$i
+    python3 -m pip install hub==$i || python -m pip install hub==$i
     echo "creating dataset for hub version $i"
     python3 $SCRIPT || python $SCRIPT
 done
