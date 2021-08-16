@@ -1,5 +1,5 @@
 echo "uninstalling hub..."
-pip3 uninstall hub -y || pip uninstall hub -y
+python3 -m pip uninstall hub -y || python -m pip uninstall hub -y
 
 rm -rf ./datasets/
 
@@ -25,4 +25,4 @@ echo "\nfinished creating datasets for all versions!\n"
 
 # in case the user used `pip3 install -e .` before they ran this
 echo "uninstalling hub..."
-pip3 uninstall hub -y || pip uninstall hub -y
+python3 -m pip uninstall hub -y || python -m pip uninstall hub -y
