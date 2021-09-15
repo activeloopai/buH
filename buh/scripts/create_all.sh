@@ -13,7 +13,9 @@ for i in \
     2.0.4 \
     2.0.5 \
     2.0.6 \
-    2.0.7
+    2.0.7 \
+    2.0.8 \
+    2.0.9
 do
     echo "\ninstalling hub version $i..."
     python3 -m pip install hub==$i || python -m pip install hub==$i

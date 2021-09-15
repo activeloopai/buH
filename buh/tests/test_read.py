@@ -13,7 +13,6 @@ def _assert_valid(ds):
 
 @versions
 def test(version, request):
-    try_skipping(request)
-    skip_if_not_available(version)
+    assert_version(version)
     ds = load_dataset(version)
     _assert_valid(ds)

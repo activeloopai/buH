@@ -17,8 +17,7 @@ def assert_new_versions(ds):
 
 @versions
 def test_new_samples(version, request):
-    try_skipping(request)
-    skip_if_not_available(version)
+    assert_version(version)
     ds = load_dataset_copy(version, overwrite=True)
 
     starting_len = len(ds)
@@ -44,8 +43,7 @@ def test_new_samples(version, request):
 
 @versions
 def test_new_tensor(version, request):
-    try_skipping(request)
-    skip_if_not_available(version)
+    assert_version(version)
     ds = load_dataset_copy(version, overwrite=True)
 
     ds.create_tensor("new_tensor")
@@ -56,8 +54,7 @@ def test_new_tensor(version, request):
 
 @versions
 def test_update_samples(version, request):
-    try_skipping(request)
-    skip_if_not_available(version)
+    assert_version(version)
     ds = load_dataset_copy(version, overwrite=True)
 
     ds[IMAGES][10:20] = get_images()[:10]
