@@ -22,7 +22,8 @@ for i in \
     2.0.14
 do
     echo "\ninstalling hub version $i..."
-    python3 -m pip install hub==$i || python -m pip install hub==$i
+    # python3 -m pip install hub==$i || python -m pip install hub==$i
+    python3 -m pip install git+https://github.com/activeloopai/Hub.git@release/$i || python -m pip install git+https://github.com/activeloopai/Hub.git@release/$i
     echo "creating dataset for hub version $i"
     python3 $SCRIPT || python $SCRIPT
 done
