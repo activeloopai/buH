@@ -9,7 +9,6 @@ SCRIPT=$BASEDIR/../create_current_version.py
 
 for i in \
     2.0.4 \
-    2.0.6 \
     2.0.7 \
     2.0.8 \
     2.0.11 \
@@ -17,7 +16,10 @@ for i in \
     2.0.14
 do
     echo "\ninstalling hub version $i..."
-    python3 -m pip install hub==$i || python -m pip install hub==$i
+    
+    # use this install method instead of `pip install hub==$i` because hub== impacts reporting statistics for pypi
+    python3 -m pip install git+https://github.com/activeloopai/Hub.git@release/$i || python -m pip install git+https://github.com/activeloopai/Hub.git@release/$i
+    
     echo "creating dataset for hub version $i"
     python3 $SCRIPT || python $SCRIPT
 done
