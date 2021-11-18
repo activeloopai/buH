@@ -19,7 +19,7 @@ do
     echo "\ninstalling hub version $i..."
     
     # use this install method instead of `pip install hub==$i` because hub== impacts reporting statistics for pypi
-    python3 -m pip install git+https://github.com/activeloopai/Hub.git@release/$i || python -m pip install git+https://github.com/activeloopai/Hub.git@release/$i
+    python3 -m pip install git+https://github.com/activeloopai/Hub.git@v$i || python -m pip install git+https://github.com/activeloopai/Hub.git@v$i
     
     echo "creating dataset for hub version $i"
     python3 $SCRIPT || python $SCRIPT
