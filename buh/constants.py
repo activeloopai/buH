@@ -7,12 +7,10 @@ DATASETS_FOLDER = "datasets"
 # 2.0.1 is not backwards-supported
 ALL_VERSIONS = [
     "2.0.4",
-    "2.0.7",
-    "2.0.8",
-    "2.0.11",
+    "2.0.6",
+    "2.0.10",
     "2.0.12",
     "2.0.14",
-    "2.1.0"
 ]  # TODO use inside the .sh script
 
 # the staging hub version is the version that will be the next release
