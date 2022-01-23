@@ -15,7 +15,8 @@ for i in \
     2.0.13 \
     2.1.1 \
     2.2.0 \
-    2.2.1.0
+    2.2.1.0 \
+    2.2.2
 do
     echo "\ninstalling hub version $i..."
     
