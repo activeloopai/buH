@@ -24,14 +24,15 @@ ALL_VERSIONS = [
     "2.3.5",
     "2.4.0",
     "2.4.1",
-    "2.4.2"
+    "2.4.2",
+    "2.5.0"
 ]  # TODO use inside the .sh script
 
 # the staging hub version is the version that will be the next release
 # this should be updated when the staging hub is released.
 # IMPORTANT: after updating this version, update `ALL_VERSIONS` and `create_all.sh`!
 # TODO: automate this
-STAGING_HUB_VERSION = "2.5.0"
+STAGING_HUB_VERSION = "2.5.1"
 
 COMPRESSION = None
 IMAGES = "images"
