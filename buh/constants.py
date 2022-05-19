@@ -25,7 +25,7 @@ ALL_VERSIONS = [
     "2.4.0",
     "2.4.1",
     "2.4.2",
-    "2.5.0"
+    "2.5.1"
 ]  # TODO use inside the .sh script
 
 # the staging hub version is the version that will be the next release
