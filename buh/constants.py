@@ -39,7 +39,7 @@ ALL_VERSIONS = [
 # this should be updated when the staging hub is released.
 # IMPORTANT: after updating this version, update `ALL_VERSIONS` and `create_all.sh`!
 # TODO: automate this
-STAGING_HUB_VERSION = "2.7.4"
+STAGING_HUB_VERSION = "2.7.5"
 
 COMPRESSION = None
 IMAGES = "images"
