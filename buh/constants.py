@@ -1,6 +1,6 @@
-import hub
+import deeplake
 
-UNDERSCORED_VERSION = hub.__version__.replace(".", "_")
+UNDERSCORED_VERSION = deeplake.__version__.replace(".", "_")
 
 DATASETS_FOLDER = "datasets"
 
@@ -39,8 +39,8 @@ ALL_VERSIONS = [
     "2.8.5"
 ]  # TODO use inside the .sh script
 
-# the staging hub version is the version that will be the next release
-# this should be updated when the staging hub is released.
+# the staging deeplake version is the version that will be the next release
+# this should be updated when the staging deeplake is released.
 # IMPORTANT: after updating this version, update `ALL_VERSIONS` and `create_all.sh`!
 # TODO: automate this
 STAGING_HUB_VERSION = "2.8.6"

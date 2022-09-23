@@ -1,5 +1,5 @@
-echo "uninstalling hub..."
-python3 -m pip uninstall hub -y || python -m pip uninstall hub -y
+echo "uninstalling deeplake..."
+python3 -m pip uninstall deeplake -y || python -m pip uninstall deeplake -y
 
 rm -rf ./datasets/
 
@@ -41,17 +41,17 @@ for i in \
     2.8.4 \
     2.8.5
 do
-    echo "\ninstalling hub version $i..."
+    echo "\ninstalling deeplake version $i..."
     
-    # use this install method instead of `pip install hub==$i` because hub== impacts reporting statistics for pypi
+    # use this install method instead of `pip install deeplake==$i` because deeplake== impacts reporting statistics for pypi
     python3 -m pip install git+https://github.com/activeloopai/Hub.git@v$i || python -m pip install git+https://github.com/activeloopai/Hub.git@v$i
     
-    echo "creating dataset for hub version $i"
+    echo "creating dataset for deeplake version $i"
     python3 $SCRIPT || python $SCRIPT
 done
 
 echo "\nfinished creating datasets for all versions!\n"
 
 # in case the user used `pip3 install -e .` before they ran this
-echo "uninstalling hub..."
-python3 -m pip uninstall hub -y || python -m pip uninstall hub -y
+echo "uninstalling deeplake..."
+python3 -m pip uninstall deeplake -y || python -m pip uninstall deeplake -y
