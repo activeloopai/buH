@@ -43,7 +43,7 @@ setup(
     tests_require=tests,
     include_package_data=True,
     zip_safe=False,
-    # entry_points={"console_scripts": ["activeloop = hub.cli.commands:cli"]},  # TODO
+    # entry_points={"console_scripts": ["activeloop = deeplake.cli.commands:cli"]},  # TODO
     setup_requires=[],
     dependency_links=[],
     project_urls={

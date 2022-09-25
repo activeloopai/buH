@@ -4,7 +4,7 @@ from buh.constants import *
 
 
 def assert_new_versions(ds):
-    v = hub.__version__
+    v = deeplake.__version__
 
     img = ds[IMAGES]
     assert img.meta.version == v
@@ -49,7 +49,7 @@ def test_new_tensor(version, request):
     ds.create_tensor("new_tensor")
     ds.new_tensor.extend(get_images()[:10])
 
-    assert ds.meta.version == hub.__version__
+    assert ds.meta.version == deeplake.__version__
 
 
 @versions

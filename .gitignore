@@ -49,7 +49,7 @@ dask-worker-space/
 *.sql
 *.sqlite
 data/
-**/dummy_data/**/hub/
+**/dummy_data/**/deeplake/
 
 # OS generated files #
 ######################
@@ -198,8 +198,8 @@ logs/
 waymo/
 output/
 cov.xml
-hub/api/cov.xml
-hub/api/nested_seq
+deeplake/api/cov.xml
+deeplake/api/nested_seq
 nested_seq
 
 # Benchmark local test data (auto-downloaded)
