@@ -3,6 +3,7 @@ from .common import *
 from buh.constants import *
 import hub
 
+
 def assert_new_versions(ds):
     v = hub.__version__
 

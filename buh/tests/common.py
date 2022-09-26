@@ -64,7 +64,9 @@ LOAD_FUNCS = {
 def assert_version(required_version):
     """Asserts that the required version is met by the installation of hub."""
 
-    assert version_compare(hub.__version__, required_version) >= 0, f"hub version {hub.__version__} is too old. Required version is {required_version}"
+    assert (
+        version_compare(hub.__version__, required_version) >= 0
+    ), f"hub version {hub.__version__} is too old. Required version is {required_version}"
 
 
 def _bc_load_dataset(path):
