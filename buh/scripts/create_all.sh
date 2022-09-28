@@ -69,7 +69,7 @@ do
 
 done
 
-echo "\nfinished creating datasets for all versions!\n"
+# echo "\nfinished creating datasets for all versions!\n"
 
 # in case the user used `pip3 install -e .` before they ran this
 echo "uninstalling deeplake..."
