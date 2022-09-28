@@ -57,17 +57,17 @@ echo "\nfinished creating datasets for all versions!\n"
 echo "uninstalling hub..."
 python3 -m pip uninstall hub -y || python -m pip uninstall hub -y
 
-## Uncomment after deeplake==3.0.0 release:
-# for i in \
-#     3.0.0
 
-# do
-#     echo "\ninstalling deeplake version $i..."
+for i in \
+    3.0.4
+
+do
+    echo "\ninstalling deeplake version $i..."
     
-#     # use this install method instead of `pip install deeplake==$i` because deeplake== impacts reporting statistics for pypi
-#     (python3 -m pip install git+https://github.com/activeloopai/deeplake.git@v$i || python -m pip install git+https://github.com/activeloopai/deeplake.git@v$i) && echo "creating dataset for deeplake version $i" && (python3 $SCRIPT || python $SCRIPT)
+    # use this install method instead of `pip install deeplake==$i` because deeplake== impacts reporting statistics for pypi
+    (python3 -m pip install git+https://github.com/activeloopai/deeplake.git@v$i || python -m pip install git+https://github.com/activeloopai/deeplake.git@v$i) && echo "creating dataset for deeplake version $i" && (python3 $SCRIPT || python $SCRIPT)
 
-# done
+done
 
 echo "\nfinished creating datasets for all versions!\n"
 
