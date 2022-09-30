@@ -59,7 +59,7 @@ python3 -m pip uninstall hub -y || python -m pip uninstall hub -y
 
 
 for i in \
-    3.0.4
+    3.0.6
 
 do
     echo "\ninstalling deeplake version $i..."
