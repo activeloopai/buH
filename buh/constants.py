@@ -54,7 +54,7 @@ ALL_VERSIONS = [
 # this should be updated when the staging deeplake is released.
 # IMPORTANT: after updating this version, update `ALL_VERSIONS` and `create_all.sh`!
 # TODO: automate this
-STAGING_HUB_VERSION = "3.1.0"
+STAGING_HUB_VERSION = "3.0.18"
 
 COMPRESSION = None
 IMAGES = "images"
