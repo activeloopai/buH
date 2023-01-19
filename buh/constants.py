@@ -59,7 +59,8 @@ ALL_VERSIONS = [
     "3.1.8",
     "3.1.9",
     "3.1.10",
-    "3.1.11"
+    "3.1.11",
+    "3.1.12"
 ]  # TODO use inside the .sh script
 
 # the staging deeplake version is the version that will be the next release
