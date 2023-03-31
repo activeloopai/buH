@@ -79,7 +79,6 @@ ALL_VERSIONS = [
     "3.2.17",
     "3.2.18",
     "3.2.19"
-    "3.2.20",
     "3.2.21"
 ]  # TODO use inside the .sh script
 
