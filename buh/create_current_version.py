@@ -1,5 +1,8 @@
 import pytest
-import deeplake
+try:
+    import hub
+except ImportError:
+    import deeplake as hub
 from buh.util import *
 from buh.constants import *
 from buh.tests.common import *
@@ -22,7 +25,7 @@ def _populate_dummy_data(ds):
 
 
 def _create0():
-    ds = deeplake.Dataset(dataset_path)
+    ds = hub.Dataset(dataset_path)
 
     ds.create_tensor(IMAGES, htype="image", sample_compression=COMPRESSION)
     ds.create_tensor(
@@ -32,7 +35,7 @@ def _create0():
 
 
 def _create1():
-    ds = deeplake.empty(dataset_path, overwrite=True)
+    ds = hub.empty(dataset_path, overwrite=True)
     ds.create_tensor(IMAGES, htype="image", sample_compression=COMPRESSION)
     ds.create_tensor(LABELS, htype="class_label", class_names=["class1", "class2"])
     _populate_dummy_data(ds)
@@ -46,7 +49,7 @@ CREATE_FUNCS = {
 
 def _create_dataset_for_current_version():
     # TODO: docstring
-    creator = CREATE_FUNCS.get(deeplake.__version__, CREATE_FUNCS["default"])
+    creator = CREATE_FUNCS.get(hub.__version__, CREATE_FUNCS["default"])
     return creator()
 
 

@@ -1,11 +1,14 @@
 import numpy as np
 from .common import *
 from buh.constants import *
-import deeplake
+try:
+    import hub
+except ImportError:
+    import deeplake as hub
 
 
 def assert_new_versions(ds):
-    v = deeplake.__version__
+    v = hub.__version__
 
     img = ds[IMAGES]
     assert img.meta.version == v
@@ -50,7 +53,7 @@ def test_new_tensor(version, request):
     ds.create_tensor("new_tensor")
     ds.new_tensor.extend(get_images()[:10])
 
-    assert ds.meta.version == deeplake.__version__
+    assert ds.meta.version == hub.__version__
 
 
 @versions

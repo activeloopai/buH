@@ -3,7 +3,10 @@ import shutil
 import pytest
 from buh.util import *
 from buh.constants import *
-import deeplake
+try:
+    import hub
+except ImportError:
+    import deeplake as hub
 
 
 def _(version):
@@ -48,11 +51,11 @@ DATASET_SUFFIX = f"ffw{UNDERSCORED_VERSION}"
 
 # TODO: move these to a separate file
 def _load0(path):
-    return deeplake.Dataset(path)
+    return hub.Dataset(path)
 
 
 def _load1(path):
-    return deeplake.load(path)
+    return hub.load(path)
 
 
 LOAD_FUNCS = {
@@ -65,14 +68,14 @@ def assert_version(required_version):
     """Asserts that the required version is met by the installation of deeplake."""
 
     assert (
-        version_compare(deeplake.__version__, required_version) >= 0
-    ), f"deeplake version {deeplake.__version__} is too old. Required version is {required_version}"
+        version_compare(hub.__version__, required_version) >= 0
+    ), f"deeplake version {hub.__version__} is too old. Required version is {required_version}"
 
 
 def _bc_load_dataset(path):
     # TODO: docstring/rename func
 
-    loader = LOAD_FUNCS.get(deeplake.__version__, LOAD_FUNCS["default"])
+    loader = LOAD_FUNCS.get(hub.__version__, LOAD_FUNCS["default"])
     return loader(path)
 
 

@@ -1,6 +1,9 @@
-import deeplake
+try:
+    import hub
+except ImportError:
+    import deeplake as hub
 
-UNDERSCORED_VERSION = deeplake.__version__.replace(".", "_")
+UNDERSCORED_VERSION = hub.__version__.replace(".", "_")
 
 DATASETS_FOLDER = "datasets"
 
