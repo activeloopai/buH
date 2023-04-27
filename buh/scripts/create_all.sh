@@ -103,7 +103,8 @@ for i in \
     3.2.19 \
     3.2.21 \
     3.2.22 \
-    3.3.0
+    3.3.0 \
+    3.3.1
 
 do
     echo "\ninstalling deeplake version $i..."
