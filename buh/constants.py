@@ -7,12 +7,8 @@ UNDERSCORED_VERSION = hub.__version__.replace(".", "_")
 
 DATASETS_FOLDER = "datasets"
 
-# 2.0.1 is not backwards-supported
+# 2.0.1, 2.0.4, 2.0.6, 2.0.10, 2.0.12 is not backwards-supported
 ALL_VERSIONS = [
-    "2.0.4",
-    "2.0.6",
-    "2.0.10",
-    "2.0.12",
     "2.0.14",
     "2.1.2",
     "2.2.0",
