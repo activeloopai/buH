@@ -16,3 +16,13 @@ def test(version, request):
     assert_version(version)
     ds = load_dataset(version)
     _assert_valid(ds)
+
+@pytest.mark.parameterize("version", ["3.2.21"])
+def test_read_none(version):
+    assert_version(version)
+    ds = load_dataset(version)
+    _assert_valid(ds)
+
+    shapes = get_labels_with_none_shapes()
+    for i, sample in enumerate(ds[LABELS_WITH_NONE]):
+        assert sample.shape == shapes[i]

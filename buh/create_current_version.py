@@ -38,12 +38,24 @@ def _create1():
     ds = hub.empty(dataset_path, overwrite=True)
     ds.create_tensor(IMAGES, htype="image", sample_compression=COMPRESSION)
     ds.create_tensor(LABELS, htype="class_label", class_names=["class1", "class2"])
+    ds.create_tensor(LABELS_WITH_NONE, htype="class_label")
+    _populate_dummy_data(ds)
+    
+    samples = get_labels_with_none()
+    for sample in samples:
+        ds[LABELS_WITH_NONE].append(sample)
+
+def _create2():
+    ds = hub.empty(dataset_path, overwrite=True)
+    ds.create_tensor(IMAGES, htype="image", sample_compression=COMPRESSION)
+    ds.create_tensor(LABELS, htype="class_label", class_names=["class1", "class2"])
     _populate_dummy_data(ds)
 
 
 CREATE_FUNCS = {
     "2.0.2": _create0,
-    "default": _create1,
+    "3.2.21": _create1,
+    "default": _create2,
 }
 
 

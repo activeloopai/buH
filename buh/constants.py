@@ -94,3 +94,4 @@ STAGING_HUB_VERSION = "3.3.3"
 COMPRESSION = None
 IMAGES = "images"
 LABELS = "labels"
+LABELS_WITH_NONE = "labels_with_none"
