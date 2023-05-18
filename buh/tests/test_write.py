@@ -28,6 +28,8 @@ def test_new_samples(version, request):
     ds[IMAGES].extend(get_images()[:10])
     for l in get_labels()[:10]:
         ds[LABELS].append(l)
+        if version_compare(version, "3.2.21") == 0:
+            ds[LABELS_WITH_NONE].append(l)
     ending_len = len(ds)
 
     assert ending_len == starting_len + 10
