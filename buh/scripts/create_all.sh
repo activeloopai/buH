@@ -124,7 +124,8 @@ for i in \
     3.6.5 \
     3.6.6 \
     3.6.7 \
-    3.6.8
+    3.6.8 \
+    3.6.9
 
 do
     echo "\ninstalling deeplake version $i..."
