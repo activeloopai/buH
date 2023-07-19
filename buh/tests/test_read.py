@@ -17,7 +17,7 @@ def test(version, request):
     ds = load_dataset(version)
     _assert_valid(ds)
 
-@pytest.mark.parametrize("version", ["3.2.21"])
+@pytest.mark.parametrize("version", ["3.2.22"])
 def test_read_none(version):
     assert_version(version)
     ds = load_dataset(version)

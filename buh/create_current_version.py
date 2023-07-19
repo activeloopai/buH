@@ -9,6 +9,7 @@ from buh.tests.common import *
 
 
 dataset_path = get_dataset_path(UNDERSCORED_VERSION)
+print("Creating dataset at", dataset_path)
 COMPRESSION = None
 
 
@@ -54,7 +55,7 @@ def _create2():
 
 CREATE_FUNCS = {
     "2.0.2": _create0,
-    "3.2.21": _create1,
+    "3.2.22": _create1,
     "default": _create2,
 }
 

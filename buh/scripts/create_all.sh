@@ -1,48 +1,42 @@
+#!/usr/bin/env bash
+
 echo "uninstalling hub..."
 python3 -m pip uninstall hub -y || python -m pip uninstall hub -y
 echo "uninstalling deeplake..."
 python3 -m pip uninstall deeplake -y || python -m pip uninstall deeplake -y
+
 rm -rf ./datasets/
+
+## Restore dataset cache since they take a while to rebuild
+if [ -d "datasets_clean" ]; then
+  echo "Restoring datasets_clean cache"
+  cp -r datasets_clean datasets
+fi
 
 export BUGGER_OFF="true"
 BASEDIR=$(dirname $0)
 SCRIPT=$BASEDIR/../create_current_version.py
 
 for i in \
-    2.0.4 \
-    2.0.7 \
-    2.0.8 \
-    2.0.11 \
     2.0.13 \
     2.1.1 \
-    2.2.0 \
-    2.2.1.0 \
-    2.2.2 \
     2.2.3 \
-    2.3.0 \
-    2.3.1 \
-    2.3.2 \
-    2.3.3 \
-    2.3.4 \
     2.3.5 \
-    2.4.0 \
-    2.4.1 \
     2.4.2 \
-    2.5.0 \
-    2.5.1 \
     2.5.2 \
     2.6.0 \
-    2.7.0 \
-    2.7.1 \
-    2.7.2 \
-    2.7.3 \
-    2.7.4 \
     2.7.5 \
-    2.8.1 \
-    2.8.4 \
     2.8.5
 do
-    echo "\ninstalling hub version $i..."
+    dataset_dir="datasets/${i//[\\.]/_}"
+    echo $underscore_version
+    if [ -d $dataset_dir ]
+    then
+      echo "Dataset ${dataset_dir} already exists"
+      continue
+    fi
+
+    echo "Installing hub version $i..."
     
     # use this install method instead of `pip install deeplake==$i` because deeplake== impacts reporting statistics for pypi
     python3 -m pip install git+https://github.com/activeloopai/deeplake.git@v$i || python -m pip install git+https://github.com/activeloopai/deeplake.git@v$i
@@ -51,101 +45,45 @@ do
     python3 $SCRIPT || python $SCRIPT
 done
 
-echo "\nfinished creating datasets for all versions!\n"
+echo "Finished creating datasets for all versions"
 
 # in case the user used `pip3 install -e .` before they ran this
 echo "uninstalling hub..."
 python3 -m pip uninstall hub -y || python -m pip uninstall hub -y
 
 
+# Only include the last patch release for each X.Y version.
+# When a new patch version is released, replace the last row.
+# When a new minor version is released, add it as  new row
 for i in \
-    3.0.6 \
-    3.0.7 \
-    3.0.8 \
-    3.0.9 \
-    3.0.10 \
-    3.0.12 \
-    3.0.13 \
-    3.0.14 \
-    3.0.15 \
-    3.0.16 \
     3.0.17 \
-    3.1.0 \
-    3.1.1 \
-    3.1.2 \
-    3.1.3 \
-    3.1.4 \
-    3.1.5 \
-    3.1.6 \
-    3.1.7 \
-    3.1.8 \
-    3.1.9 \
-    3.1.10 \
-    3.1.11 \
     3.1.12 \
-    3.2.1 \
-    3.2.2 \
-    3.2.3 \
-    3.2.4 \
-    3.2.5 \
-    3.2.6 \
-    3.2.7 \
-    3.2.8 \
-    3.2.9 \
-    3.2.10 \
-    3.2.11 \
-    3.2.12 \
-    3.2.13 \
-    3.2.15 \
-    3.2.16 \
-    3.2.17 \
-    3.2.18 \
-    3.2.19 \
-    3.2.21 \
     3.2.22 \
-    3.3.0 \
-    3.3.1 \
     3.3.2 \
-    3.4.0 \
-    3.4.1 \
-    3.4.2 \
-    3.4.3 \
     3.4.4 \
-    3.5.0 \
-    3.5.1 \
-    3.5.2 \
-    3.5.3 \
     3.5.4 \
-    3.6.0 \
-    3.6.1 \
-    3.6.2 \
-    3.6.3 \
-    3.6.4 \
-    3.6.5 \
-    3.6.6 \
-    3.6.7 \
-    3.6.8 \
-    3.6.9 \
-    3.6.10 \
-    3.6.11 \
-    3.6.12 \
-    3.6.13 \
-    3.6.14 \
-    3.6.15 \
-    3.6.16 \
-    3.6.17 \
-    3.6.18 \
-    3.6.19
+    3.6.19 \
 
 do
-    echo "\ninstalling deeplake version $i..."
+    dataset_dir="datasets/${i//[\\.]/_}"
+    echo $underscore_version
+    if [ -d $dataset_dir ]
+    then
+      echo "Dataset ${dataset_dir} already exists"
+      continue
+    fi
+
+    echo "Installing deeplake version $i..."
     
     # use this install method instead of `pip install deeplake==$i` because deeplake== impacts reporting statistics for pypi
     (python3 -m pip install git+https://github.com/activeloopai/deeplake.git@v$i || python -m pip install git+https://github.com/activeloopai/deeplake.git@v$i) && echo "creating dataset for deeplake version $i" && (python3 $SCRIPT || python $SCRIPT)
 
 done
 
-# echo "\nfinished creating datasets for all versions!\n"
+echo "Saving datasets_clean cache to $(pwd)/datasets_clean"
+cp -rn datasets datasets_clean
+
+# echo "Finished creating datasets for all versions!"
 
 # in case the user used `pip3 install -e .` before they ran this
 echo "uninstalling deeplake..."

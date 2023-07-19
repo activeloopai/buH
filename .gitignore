@@ -198,6 +198,7 @@ logs/
 waymo/
 output/
 cov.xml
+*.iml
 deeplake/api/cov.xml
 deeplake/api/nested_seq
 nested_seq
