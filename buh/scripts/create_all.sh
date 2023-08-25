@@ -63,6 +63,7 @@ for i in \
     3.4.4 \
     3.5.4 \
     3.6.21
+# Replace the above line with the new patch version on release
 
 do
     dataset_dir="datasets/${i//[\\.]/_}"

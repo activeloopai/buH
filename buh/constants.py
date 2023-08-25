@@ -24,8 +24,7 @@ ALL_VERSIONS = [
     "3.3.2",
     "3.4.4",
     "3.5.4",
-    "3.6.19",
-    "3.6.20",
+    # Replace this with the new patch version
     "3.6.21",
 ]  # TODO use inside the .sh script
 
