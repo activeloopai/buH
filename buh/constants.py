@@ -24,15 +24,16 @@ ALL_VERSIONS = [
     "3.3.2",
     "3.4.4",
     "3.5.4",
+    "3.6.26",
     # Replace this with the new patch version
-    "3.6.26"
+    "3.7.0",
 ]  # TODO use inside the .sh script
 
 # the staging deeplake version is the version that will be the next release
 # this should be updated when the staging deeplake is released.
 # IMPORTANT: after updating this version, update `ALL_VERSIONS` and `create_all.sh`!
 # TODO: automate this
-STAGING_HUB_VERSION = "3.6.27"
+STAGING_HUB_VERSION = "3.7.1"
 
 COMPRESSION = None
 IMAGES = "images"
