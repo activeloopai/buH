@@ -41,7 +41,7 @@ def _create1():
     ds.create_tensor(LABELS, htype="class_label", class_names=["class1", "class2"])
     ds.create_tensor(LABELS_WITH_NONE, htype="class_label")
     _populate_dummy_data(ds)
-    
+
     samples = get_labels_with_none()
     for sample in samples:
         ds[LABELS_WITH_NONE].append(sample)
