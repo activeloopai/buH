@@ -51,10 +51,10 @@ for i in "${versions[@]}"; do
     y_print "installing deeplake version: $i"
     python -m pip install git+https://github.com/activeloopai/deeplake.git@v$i
     y_print "creating dataset for hub version $i"
+    pip install -e buH
+    y_print "installing buh"
     python "${SCRIPT}"
     cp -rn datasets/ datasets_clean/
-    y_print "installing buh"
-    pip install -e buH
     pytest --junitxml="buh.$i.results.xml" --capture=sys -o junit_logging=all buH/
     deactivate
     rm -r "venv_$i"
