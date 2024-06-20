@@ -33,30 +33,28 @@ BASEDIR=$(dirname $0)
 SCRIPT=$BASEDIR/../create_current_version.py
 
 for i in "${versions[@]}"; do
+    y_print "creating virtual environment: $i"
     $PYTHON -m venv "venv_$i"
     # shellcheck source=/dev/null
     source "venv_$i/bin/activate"
-    pip install -U pip setuptools pytest
+    y_print "installing deeplake and dependencies"
+    pip install -U pip setuptools
     pip install -r deeplake/requirements/common.txt
     pip install -r deeplake/requirements/tests.txt
     pip install -e .[all]
     dataset_dir="datasets/${i//[\\.]/_}"
-    y_print "Version: $i"
     if [ -d "${dataset_dir}" ]
     then
       y_print "Dataset ${dataset_dir} already exists"
       continue
     fi
-
-    y_print "Installing hub version $i..."
-
-    # use this install method instead of `pip install deeplake==$i` because deeplake== impacts reporting statistics for pypi
-
+    y_print "installing deeplake version: $i"
     python -m pip install git+https://github.com/activeloopai/deeplake.git@v$i
-
     y_print "creating dataset for hub version $i"
     python "${SCRIPT}"
     cp -rn datasets datasets_clean
+    y_print "installing buh"
+    pip install -e buH
     pytest --junitxml="buh.$i.results.xml" --capture=sys -o junit_logging=all buH/
     deactivate
     rm -r "venv_$i"
