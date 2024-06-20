@@ -10,8 +10,8 @@ else
 fi
 
 readarray -t versions <<< "$($PYTHON -c '
-from buh.constants import ALL_VERSIONS
-for i in ALL_VERSIONS:
+from buH.buh.versions import VERSIONS
+for i in VERSIONS:
     print(i)
 ')"
 
@@ -20,18 +20,13 @@ y_print() {
   echo -e "\033[33m $* \033[00m"
 }
 
-y_print "uninstalling hub..."
-$PYTHON -m pip uninstall hub -y
-y_print "uninstalling deeplake..."
-$PYTHON -m pip uninstall deeplake -y
+rm -rf ./datasets/ || true
 
-rm -rf ./datasets/
-
-## Restore dataset cache since they take a while to rebuild
-if [ -d "datasets_clean" ]; then
-  y_print "Restoring datasets_clean cache"
-  cp -r datasets_clean datasets
-fi
+# ## Restore dataset cache since they take a while to rebuild
+# if [ -d "datasets_clean" ]; then
+#   y_print "Restoring datasets_clean cache"
+#   cp -r datasets_clean datasets
+# fi
 
 export BUGGER_OFF="true"
 BASEDIR=$(dirname $0)
@@ -41,6 +36,10 @@ for i in "${versions[@]}"; do
     $PYTHON -m venv "venv_$i"
     # shellcheck source=/dev/null
     source "venv_$i/bin/activate"
+    pip install -U pip setuptools pytest
+    pip install -r deeplake/requirements/common.txt
+    pip install -r deeplake/requirements/tests.txt
+    pip install -e .[all]
     dataset_dir="datasets/${i//[\\.]/_}"
     y_print "Version: $i"
     if [ -d "${dataset_dir}" ]
@@ -57,9 +56,12 @@ for i in "${versions[@]}"; do
 
     y_print "creating dataset for hub version $i"
     python "${SCRIPT}"
+    cp -rn datasets datasets_clean
+    pytest --junitxml="buh.$i.results.xml" --capture=sys -o junit_logging=all buH/
     deactivate
+    rm -r "venv_$i"
 done
 
 y_print "Finished creating datasets for all versions"
 y_print "Saving datasets_clean cache to $(pwd)/datasets_clean"
-cp -rn datasets datasets_clean
+
