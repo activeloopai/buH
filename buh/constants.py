@@ -2,8 +2,6 @@ try:
     import hub
 except ImportError:
     import deeplake as hub
-finally:
-    print(1)
 
 from buh.versions import VERSIONS
 

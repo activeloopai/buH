@@ -26,7 +26,7 @@ def _populate_dummy_data(ds):
 
 
 def _create0():
-    ds = hub.Dataset(dataset_path)
+    ds = hub.empty(dataset_path)
 
     ds.create_tensor(IMAGES, htype="image", sample_compression=COMPRESSION)
     ds.create_tensor(
@@ -54,16 +54,24 @@ def _create2():
 
 
 CREATE_FUNCS = {
-    "2.0.2": _create0,
-    "3.2.22": _create1,
+    "2": _create0,
+    "3": _create1,
     "default": _create2,
 }
 
 
 def _create_dataset_for_current_version():
     # TODO: docstring
-    creator = CREATE_FUNCS.get(hub.__version__, CREATE_FUNCS["default"])
-    return creator()
+    major = hub.__version__.split(".")[0]
+    if major == "2":
+        print("\033[33m", "creator function for 2~", "\033[00m")
+        return _create0()
+    elif major == "3":
+        print("\033[33m", "creator function for 3~", "\033[00m")
+        return _create1()
+    else:
+        print("\033[33m", "creator function for default", "\033[00m")
+        return _create2()
 
 
 if __name__ == "__main__":

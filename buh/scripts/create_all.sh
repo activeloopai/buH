@@ -5,7 +5,7 @@ if ( hash python3 ); then
 elif ( hash python); then
   PYTHON=python
 else
-  echo "Neither python or python3 is found in PATH"
+  echo "Neither python or python3 executable found in PATH"
   exit 1
 fi
 
@@ -32,16 +32,35 @@ export BUGGER_OFF="true"
 BASEDIR=$(dirname $0)
 SCRIPT=$BASEDIR/../create_current_version.py
 
+y_print "installing deeplake common dependencies so venv can take from local cache"
+y_print "installing pip and setuptools globally"
+$PYTHON -m pip install -qqq -U pip setuptools
+y_print "installing deeplake common dependencies globally"
+$PYTHON -m pip install -qqq -r deeplake/requirements/common.txt
+y_print "installing deeplake test dependencies globally"
+$PYTHON -m pip install -qqq -r deeplake/requirements/tests.txt
+y_print "installing deeplake globally"
+$PYTHON -m pip install -qqq -e .[all]
+y_print "installing pytest globally"
+$PYTHON -m pip install -qqq pytest
+y_print "installing buH globally"
+$PYTHON -m pip install -qqq -e buH
+
 for i in "${versions[@]}"; do
     y_print "creating virtual environment: $i"
     $PYTHON -m venv "venv_$i"
     # shellcheck source=/dev/null
     source "venv_$i/bin/activate"
-    y_print "installing deeplake and dependencies"
-    pip install -U pip setuptools
-    pip install -r deeplake/requirements/common.txt
-    pip install -r deeplake/requirements/tests.txt
-    pip install -e .[all]
+    y_print "installing pip and setuptools"
+    pip install -qqq -U pip setuptools
+    y_print "installing deeplake common dependencies"
+    pip install -qqq -r deeplake/requirements/common.txt
+    y_print "installing deeplake test dependencies"
+    pip install -qqq -r deeplake/requirements/tests.txt
+    y_print "installing pytest"
+    pip install -qqq pytest
+    y_print "installing buH"
+    pip install -qqq -e buH
     dataset_dir="datasets/${i//[\\.]/_}"
     if [ -d "${dataset_dir}" ]
     then
@@ -49,17 +68,11 @@ for i in "${versions[@]}"; do
       continue
     fi
     y_print "installing deeplake version: $i"
-    python -m pip install git+https://github.com/activeloopai/deeplake.git@v$i
+    python -m pip install -qqq git+https://github.com/activeloopai/deeplake.git@v$i
     y_print "creating dataset for hub version $i"
-    pip install -e buH
-    y_print "installing buh"
     python "${SCRIPT}"
-    cp -rn datasets/ datasets_clean/
+    cp -rf datasets/* datasets_clean/
     pytest --junitxml="buh.$i.results.xml" --capture=sys -o junit_logging=all buH/
     deactivate
     rm -r "venv_$i"
 done
-
-y_print "Finished creating datasets for all versions"
-y_print "Saving datasets_clean cache to $(pwd)/datasets_clean"
-
