@@ -11,7 +11,7 @@ DATASETS_FOLDER = "datasets"
 # When a new patch version is released, replace the last row.
 # When a new minor version is released, add it as  new row
 ALL_VERSIONS = [
-    "2.2.3",
+    # "2.2.3",
     "2.3.5",
     "2.4.2",
     "2.5.2",
@@ -27,7 +27,7 @@ ALL_VERSIONS = [
     "3.6.26",
     "3.7.3",
     "3.8.27",
-    "3.9.10"
+    "3.9.11"
     # Replace the above line with the new patch version
 ]  # TODO use inside the .sh script
 
@@ -35,7 +35,7 @@ ALL_VERSIONS = [
 # this should be updated when the staging deeplake is released.
 # IMPORTANT: after updating this version, update `ALL_VERSIONS` and `create_all.sh`!
 # TODO: automate this
-STAGING_HUB_VERSION = "3.9.11"
+STAGING_HUB_VERSION = "3.9.12"
 
 COMPRESSION = None
 IMAGES = "images"
