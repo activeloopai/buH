@@ -27,7 +27,7 @@ ALL_VERSIONS = [
     "3.6.26",
     "3.7.3",
     "3.8.27",
-    "3.9.18"
+    "3.9.19"
     # Replace the above line with the new patch version
 ]  # TODO use inside the .sh script
 
@@ -35,7 +35,7 @@ ALL_VERSIONS = [
 # this should be updated when the staging deeplake is released.
 # IMPORTANT: after updating this version, update `ALL_VERSIONS` and `create_all.sh`!
 # TODO: automate this
-STAGING_HUB_VERSION = "3.9.19"
+STAGING_HUB_VERSION = "3.9.20"
 
 COMPRESSION = None
 IMAGES = "images"
