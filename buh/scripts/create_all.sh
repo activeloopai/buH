@@ -40,10 +40,7 @@ do
     echo "Installing hub version $i..."
     
     # use this install method instead of `pip install deeplake==$i` because deeplake== impacts reporting statistics for pypi
-    python3 -m pip install git+https://github.com/activeloopai/deeplake.git@v$i || \
-    python -m pip install git+https://github.com/activeloopai/deeplake.git@v$i || \
-    python3 -m pip install git+https://github.com/activeloopai/deeplake.git@v$i --use-deprecated=legacy-resolver --constraint "$CONSTRAINT_FILE" || \
-    python -m pip install git+https://github.com/activeloopai/deeplake.git@v$i --use-deprecated=legacy-resolver --constraint "$CONSTRAINT_FILE"
+    python3 -m pip install git+https://github.com/activeloopai/deeplake.git@v$i || python -m pip install git+https://github.com/activeloopai/deeplake.git@v$i
     
     echo "creating dataset for hub version $i"
     python3 $SCRIPT || python $SCRIPT
@@ -84,7 +81,10 @@ do
     echo "Installing deeplake version $i..."
     
     # use this install method instead of `pip install deeplake==$i` because deeplake== impacts reporting statistics for pypi
-    (python3 -m pip install git+https://github.com/activeloopai/deeplake.git@v$i --use-deprecated=legacy-resolver || python -m pip install git+https://github.com/activeloopai/deeplake.git@v$i --use-deprecated=legacy-resolver ) && echo "creating dataset for deeplake version $i" && (python3 $SCRIPT || python $SCRIPT)
+    (python3 -m pip install git+https://github.com/activeloopai/deeplake.git@v$i --use-deprecated=legacy-resolver || \
+     python -m pip install git+https://github.com/activeloopai/deeplake.git@v$i --use-deprecated=legacy-resolver || \
+     python3 -m pip install git+https://github.com/activeloopai/deeplake.git@v$i --use-deprecated=legacy-resolver --constraint "$CONSTRAINT_FILE" || \
+     python -m pip install git+https://github.com/activeloopai/deeplake.git@v$i --use-deprecated=legacy-resolver --constraint "$CONSTRAINT_FILE" ) && echo "creating dataset for deeplake version $i" && (python3 $SCRIPT || python $SCRIPT)
 
 done
 
