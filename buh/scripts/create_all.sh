@@ -66,7 +66,7 @@ for i in \
     3.6.26 \
     3.7.3 \
     3.8.27 \
-    3.9.47
+    3.9.48
 # Replace the above line with the new patch version on release
 
 do
